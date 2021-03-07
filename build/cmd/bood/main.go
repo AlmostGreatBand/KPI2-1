@@ -11,7 +11,7 @@ import (
 	"github.com/roman-mazur/bood"
 	"github.com/roman-mazur/bood/gomodule"
 	// TODO: Підставте свій власний пакет.
-	// "github.com/roman-mazur/design-practice-1-template/build/gomodule"
+	// "github.com/AlmostGreatBand/KPI2-1/build/gomodule"
 )
 
 var (

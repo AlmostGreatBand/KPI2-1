@@ -1,4 +1,4 @@
-module github.com/roman-mazur/design-practice-1-template
+module github.com/AlmostGreatBand/KPI2-1
 
 go 1.15
 

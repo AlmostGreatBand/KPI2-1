@@ -6,7 +6,7 @@ type testedBinaryModule struct {
 	blueprint.SimpleName
 
 	properties struct {
-		// TODO: Визначте поля структури, щоб отримати дані з визначень у файлі build.bood
+		// TODO: Визначте поля структури, щоб отримати дані з визначень у файлі build.bood.exe
 	}
 }
 
