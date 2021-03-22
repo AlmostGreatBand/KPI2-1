@@ -10,7 +10,7 @@ before_install:
 
 script:
   - go build ./build/cmd/bood
-  - ./~/build/out/bin/bood
+  - ./../../build/out/bin/bood
   - echo "Tests"
-  - cat ./~/out/test/tested_binary
+  - cat ./../../out/test/tested_binary
   - echo "Archive"
