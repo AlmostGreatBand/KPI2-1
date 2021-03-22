@@ -13,7 +13,9 @@ script:
   - sudo mv bood /usr/local/bin/
   - cd build
   - bood
+  - cd ../example
   - ls
-  - echo "Tests"
-  - cat ../../out/test/tested_binary
-  - echo "Archive"
+  - cd tested-binary
+  - bood
+  - cd ../zip-archive
+  - bood
