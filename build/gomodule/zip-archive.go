@@ -33,7 +33,7 @@ func (z *zipModule) GenerateBuildActions(ctx blueprint.ModuleContext) {
 	config := bood.ExtractConfig(ctx)
 	config.Debug.Printf("Adding zip actions for '%s'", name)
 
-	zipPath := path.Join(config.BaseOutputDir, "archives", name)
+	zipPath := path.Join(config.BaseOutputDir, "archives", name+".zip")
 
 	inputErrors := false
 
