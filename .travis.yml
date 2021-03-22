@@ -11,6 +11,8 @@ before_install:
 script:
   - go build ./build/cmd/bood
   - ../../build/out/bin/bood
+  - ls
+  - ll
   - echo "Tests"
   - cat ../../out/test/tested_binary
   - echo "Archive"
