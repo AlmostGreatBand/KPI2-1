@@ -7,3 +7,10 @@ before_install:
   - wget https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-linux.zip -O ninja-1.10.2.zip
   - sudo unzip ninja-1.10.2.zip -d /usr/local/bin
   - sudo update-alternatives --install /usr/bin/ninja ninja /usr/local/bin/ninja 1 --force
+
+script:
+  - go build ./build/cmd/bood
+  - ./~/build/out/bin/bood
+  - echo "Tests"
+  - cat ./~/out/test/tested_binary
+  - echo "Archive"
