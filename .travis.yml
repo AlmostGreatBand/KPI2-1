@@ -10,11 +10,9 @@ before_install:
 
 script:
   - go build ./build/cmd/bood
+  - sudo mv bood /usr/local/bin/
+  - cd build
   - bood
-  - ../../build/out/bin/bood
-  - ./build/out/bin/bood
-  - ls
-  - cd ./example
   - ls
   - echo "Tests"
   - cat ../../out/test/tested_binary
