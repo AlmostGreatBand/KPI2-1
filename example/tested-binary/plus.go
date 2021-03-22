@@ -9,6 +9,6 @@ func main() {
 }
 
 func plus(a, b int) int {
-	fmt.Printf("execute plus operation on arguments: %d, %d \n", a, b)
+	fmt.Printf("execute + operation on arguments: %d, %d \n", a, b)
 	return a + b
 }

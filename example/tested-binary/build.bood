@@ -3,7 +3,7 @@ tested_binary {
     pkg: ".",
     testPkg: "./...",
     srcs: ["**/*.go"],
-    srcsExclude: [],
+    srcsExclude: ["exclude.go"],
     testSrcs: ["**/*_test.go"],
-    testSrcsExclude: []
+    testSrcsExclude: ["exclude_test.go"]
 }
