@@ -8,22 +8,24 @@ import (
 	"testing"
 )
 
-func TestSimpleBinFactory(t *testing.T) {
+func TestSimpleTestFactory(t *testing.T) {
 	ctx := blueprint.NewContext()
 
 	ctx.MockFileSystem(map[string][]byte{
 		"Blueprints": []byte(`
-			go_binary {
+			tested_binary {
 			  name: "test-out",
 			  srcs: ["test-src.go"],
+			  testSrcs: ["test-src_test.go"],
 			  pkg: ".",
-	          vendorFirst: true
+	          vendorFirst: false
 			}
 		`),
-		"test-src.go": nil,
+		"test-src.go":      nil,
+		"test-src_test.go": nil,
 	})
 
-	ctx.RegisterModuleType("go_binary", SimpleTestFactory)
+	ctx.RegisterModuleType("tested_binary", SimpleTestFactory)
 
 	cfg := bood.NewConfig()
 
@@ -42,13 +44,13 @@ func TestSimpleBinFactory(t *testing.T) {
 	} else {
 		text := buffer.String()
 		t.Logf("Gennerated ninja build file:\n%s", text)
-		if !strings.Contains(text, "out/bin/test-out: ") {
+		if !strings.Contains(text, "out/bin/test-out: g.gomodule.binaryBuild | test-src.go") {
 			t.Errorf("Generated ninja file does not have build of the test module")
 		}
-		if !strings.Contains(text, " test-src.go") {
-			t.Errorf("Generated ninja file does not have source dependency")
+		if !strings.Contains(text, "out/test/test-out: g.gomodule.binaryTest | test-src_test.go test-src.go") {
+			t.Errorf("Generated ninja file does not have build of the test module")
 		}
-		if !strings.Contains(text, "build vendor: g.gomodule.vendor | go.mod") {
+		if strings.Contains(text, "build vendor: g.gomodule.vendor | go.mod") {
 			t.Errorf("Generated ninja file does not have vendor build rule")
 		}
 	}
