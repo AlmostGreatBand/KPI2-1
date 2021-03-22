@@ -7,11 +7,9 @@ import (
 	"os"
 	"os/exec"
 
+	"github.com/AlmostGreatBand/KPI2-1/build/gomodule"
 	"github.com/google/blueprint"
 	"github.com/roman-mazur/bood"
-	"github.com/roman-mazur/bood/gomodule"
-	// TODO: Підставте свій власний пакет.
-	// "github.com/AlmostGreatBand/KPI2-1/build/gomodule"
 )
 
 var (
@@ -21,8 +19,7 @@ var (
 
 func NewContext() *blueprint.Context {
 	ctx := bood.PrepareContext()
-	// TODO: Замініть імплементацію go_binary на власну.
-	ctx.RegisterModuleType("go_binary", gomodule.SimpleBinFactory)
+	ctx.RegisterModuleType("tested_binary", gomodule.SimpleTestFactory)
 	return ctx
 }
 

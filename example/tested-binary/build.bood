@@ -1,0 +1,9 @@
+tested_binary {
+    name: "tested_binary",
+    pkg: ".",
+    testPkg: "./...",
+    srcs: ["**/*.go"],
+    srcsExclude: [],
+    testSrcs: ["**/*_test.go"],
+    testSrcsExclude: []
+}
