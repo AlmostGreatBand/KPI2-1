@@ -36,6 +36,7 @@ type testedBinaryModule struct {
 		TestSrcs []string
 		SrcsExclude []string
 		TestSrcsExclude []string
+		Optional bool
 		VendorFirst bool
 
 		Deps []string
@@ -99,29 +100,35 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 		buildInputs = append(buildInputs, vendorDirPath)
 	}
 
-	ctx.Build(pctx, blueprint.BuildParams{
-		Description: fmt.Sprintf("Build %s as Go binary", name),
-		Rule:        goBuild,
-		Outputs:     []string{buildPath},
-		Implicits:   buildInputs,
-		Args: map[string]string{
-			"outPath":	  buildPath,
-			"workDir":    ctx.ModuleDir(),
-			"pkg":        tb.properties.Pkg,
-		},
-	})
+	if buildInputs != nil {
+		ctx.Build(pctx, blueprint.BuildParams{
+			Description: fmt.Sprintf("Build %s as Go binary", name),
+			Rule:        goBuild,
+			Outputs:     []string{buildPath},
+			Implicits:   buildInputs,
+			Optional: 	 tb.properties.Optional,
+			Args: map[string]string{
+				"outPath":	  buildPath,
+				"workDir":    ctx.ModuleDir(),
+				"pkg":        tb.properties.Pkg,
+			},
+		})
+	}
 
-	ctx.Build(pctx, blueprint.BuildParams{
-		Description: fmt.Sprintf("Test %s as Go binary", name),
-		Rule:        goTest,
-		Outputs:     []string{testPath},
-		Implicits:   testInputs,
-		Args: map[string]string{
-			"outPath": 	  testPath,
-			"workDir":    ctx.ModuleDir(),
-			"pkg":        tb.properties.TestPkg,
-		},
-	})
+	if testInputs != nil {
+		ctx.Build(pctx, blueprint.BuildParams{
+			Description: fmt.Sprintf("Test %s as Go binary", name),
+			Rule:        goTest,
+			Outputs:     []string{testPath},
+			Implicits:   testInputs,
+			Optional: 	 tb.properties.Optional,
+			Args: map[string]string{
+				"outPath": 	  testPath,
+				"workDir":    ctx.ModuleDir(),
+				"pkg":        tb.properties.TestPkg,
+			},
+		})
+	}
 }
 
 func SimpleTestFactory() (blueprint.Module, []interface{}) {
